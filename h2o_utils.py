@@ -21,6 +21,8 @@ class H2OUtils:
         :param overwrite: boolean, overwrite the model 
         """
         g = self.h2o.get_grid(grid_id)
+        print(g.grid_id)
+        print(g)
         for i, m in enumerate(g.models):
             print("Save model" + m.model_id + " to " + path + "/" + m.model_id)
             h2o.save_model(model=m, path=path, force=overwrite)
