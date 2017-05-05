@@ -65,6 +65,30 @@ class H2OUtils:
                 print("Save model " + mh.model_id + " to " + path + "/" + mh.model_id)
                 self.h2o.save_model(model=mh, path=path, force=overwrite)
         
+    def save_all_frames(self, path, overwrite=False):
+        """Save all models to a directory.
+
+        :param path: String path, where to save your models.
+        :param overwrite: boolean, overwrite the frame
+        """
+        models = []
+        for f in h2o.ls()['key']:
+            if 'modelmetrics' not in f:
+                try:
+                    fh = h2o.get_frame(f)
+                except (h2o.exceptions.H2OResponseError, h2o.exceptions.H2OServerError):
+                    pass
+                else:
+                    try: # quick and dirty solution for NoneType
+                        fh.frame_id 
+                    except:
+                        pass
+                    else:
+                        print(fh.frame_id)
+                        print("Save frame " + fh.frame_id + " to " + path + "/" + fh.frame_id)
+                        h2o.export_file(fh, path=path + os.sep + fh.frame_id, force=overwrite)
+                    
+        
     def list_models(self,rx, verbose=True):
         """List models of H2O."""
         models = []
