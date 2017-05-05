@@ -1,5 +1,7 @@
-Save an H2O enviornment in Python
+Save/Load an H2O enviornment in Python
 -------------------------------------------------------
+
+See a discussion http://stackoverflow.com/questions/43791092/way-to-save-the-whole-environment-in-h2o 
 
 See a jupiter demo https://github.com/mmagnus/h2o_utils/blob/master/h2o_utils_demo.ipynb 
 
