@@ -13,21 +13,24 @@ class H2OUtils:
         self.h2o = h2o
         print()
         
-    def save_models_of_grid(self, grid_id, path):
+    def save_models_of_grid(self, grid_id, path, overwrite=True):
         """Save models of a grid.
 
         :param grid_id: String containing a grid_id.
         :param path: String path, where to save your models.
+        :param overwrite: boolean, overwrite the model 
         """
         g = self.h2o.get_grid(grid_id)
         for i, m in enumerate(g.models):
-            h2o.save_model(model=m, path=path)
+            print("Save model" + m.model_id + " to " + path + "/" + m.model_id)
+            h2o.save_model(model=m, path=path, force=overwrite)
             
     def save_models(self, rx, path, overwrite=False):
         """Save models from H2O to path according to the regular expression.
 
         :param rx: String, python regular expression.
         :param path: String path, where to save your models.
+        :param overwrite: boolean, overwrite the model
         """
         models = self.list_models(rx)
         for i, m in enumerate(models):
