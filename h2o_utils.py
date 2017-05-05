@@ -53,6 +53,7 @@ class H2OUtils:
         """Save all models to a directory.
 
         :param path: String path, where to save your models.
+        :param overwrite: boolean, overwrite the model
         """
         models = []
         for m in self.h2o.ls()['key']:
@@ -61,7 +62,7 @@ class H2OUtils:
             except (h2o.exceptions.H2OResponseError, h2o.exceptions.H2OServerError):
                 pass
             else:
-                print("Save model" + mh.model_id + " to " + path + "/" + mh.model_id)
+                print("Save model " + mh.model_id + " to " + path + "/" + mh.model_id)
                 self.h2o.save_model(model=mh, path=path, force=overwrite)
         
     def list_models(self,rx, verbose=True):
