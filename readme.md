@@ -1,5 +1,7 @@
-Save models of H2O in Python
+Save an H2O enviornment in Python
 -------------------------------------------------------
+
+See a jupiter demo https://github.com/mmagnus/h2o_utils/blob/master/h2o_utils_demo.ipynb 
 
     python h2o_utils.py
     H2OUtils: connect to H2O
