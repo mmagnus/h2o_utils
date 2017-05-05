@@ -49,6 +49,21 @@ class H2OUtils:
             if verbose: print('Load ', m)
             self.h2o.load_model(m)
 
+    def save_all_models(self, path, overwrite=False):
+        """Save all models to a directory.
+
+        :param path: String path, where to save your models.
+        """
+        models = []
+        for m in self.h2o.ls()['key']:
+            try:
+                mh = self.h2o.get_model(m)
+            except (h2o.exceptions.H2OResponseError, h2o.exceptions.H2OServerError):
+                pass
+            else:
+                print("Save model" + mh.model_id + " to " + path + "/" + mh.model_id)
+                self.h2o.save_model(model=mh, path=path, force=overwrite)
+        
     def list_models(self,rx, verbose=True):
         """List models of H2O."""
         models = []
@@ -65,3 +80,4 @@ if __name__ == '__main__':
     h = H2OUtils(ip='localhost', port="54321")
     h.list_models('^dp.+0')
     h.save_models(rx='^dp.+0', path='/tmp/', overwrite=True)
+    h.save_all_models(path='/tmp/', overwrite=True)
